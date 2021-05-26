@@ -14,6 +14,12 @@ const connectionData = {
     database: 'doupcr6pemj88',
     password: 'b806f5faa19f01c57e4df5a25f87c0e2e26d900f44da776349cd51023ae192a3',
     port: 5432,
+    dialect: 'postgresql',
+    ssl: true,
+    dialectOptions: {
+      ssl: { require: true },
+    },
+    logging: false,
   }
 const client = new Client(connectionData)
 client.connect()
