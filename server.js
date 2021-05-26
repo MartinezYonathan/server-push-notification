@@ -23,14 +23,7 @@ const connectionData = {
   }
 const client = new Client(connectionData)
 client.connect()
-client.query('SELECT * FROM table')
-    .then(response => {
-        console.log(response.rows)
-        client.end()
-    })
-    .catch(err => {
-        client.end()
-    })
+
 const vapidKeys = {
     "publicKey": "BMtQTXeTAMb6dirLG0o2oMENske28eSfSRJkK6VEdXH9lcH3mwfEU7cza8hNhEnJOOyacb95QOeIFaTpPdFn8Xw",
     "privateKey": "eOLnIMyvDEhCWvwTOFax9MGbV0W8c_WTjZ_KCW1CREY"
