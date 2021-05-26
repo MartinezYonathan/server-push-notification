@@ -8,15 +8,6 @@ const app = express();
 /**
  * Settings VAPID
  */
-const connectionData = {
-    user: 'jhlqfjaaffpmon',
-    host: 'ec2-107-21-10-179.compute-1.amazonaws.com',
-    database: 'doupcr6pemj88',
-    password: 'b806f5faa19f01c57e4df5a25f87c0e2e26d900f44da776349cd51023ae192a3',
-    port: 5432
-  }
-const client = new Client(connectionData)
-client.connect()
 
 const vapidKeys = {
     "publicKey": "BMtQTXeTAMb6dirLG0o2oMENske28eSfSRJkK6VEdXH9lcH3mwfEU7cza8hNhEnJOOyacb95QOeIFaTpPdFn8Xw",
