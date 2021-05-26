@@ -8,16 +8,23 @@ const app = express();
 /**
  * Settings VAPID
  */
-
- const connectionData = {
-    user: 'alejandro',
-    host: '',
-    database: 'evaluaciones',
-    password: 'mysecretpassword',
+const connectionData = {
+    user: 'jhlqfjaaffpmon',
+    host: 'ec2-107-21-10-179.compute-1.amazonaws.com',
+    database: 'doupcr6pemj88',
+    password: 'b806f5faa19f01c57e4df5a25f87c0e2e26d900f44da776349cd51023ae192a3',
     port: 5432,
   }
-  const client = new Client(connectionData)
-
+const client = new Client(connectionData)
+client.connect()
+client.query('SELECT * FROM table')
+    .then(response => {
+        console.log(response.rows)
+        client.end()
+    })
+    .catch(err => {
+        client.end()
+    })
 const vapidKeys = {
     "publicKey": "BMtQTXeTAMb6dirLG0o2oMENske28eSfSRJkK6VEdXH9lcH3mwfEU7cza8hNhEnJOOyacb95QOeIFaTpPdFn8Xw",
     "privateKey": "eOLnIMyvDEhCWvwTOFax9MGbV0W8c_WTjZ_KCW1CREY"
