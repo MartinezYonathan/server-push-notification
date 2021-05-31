@@ -1,13 +1,13 @@
 const webpush = require('web-push');
 const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser');
-const { Client } = require('pg')
+const db = require('./queries')
 
 const app = express();
 /**
  * Settings VAPID
  */
+
+
 
 const vapidKeys = {
     "publicKey": "BMtQTXeTAMb6dirLG0o2oMENske28eSfSRJkK6VEdXH9lcH3mwfEU7cza8hNhEnJOOyacb95QOeIFaTpPdFn8Xw",
@@ -22,6 +22,7 @@ webpush.setVapidDetails(
 
 const enviarNotificacion = (req, res) => {
 
+    console.log(db.getTokent); 
     const pushSubscription = {
         endpoint: 'https://fcm.googleapis.com/fcm/send/dr4CZJxORFM:APA91bG3i1TEITd8fpV_FL-LDFvh6CkVT7LQo2o8-aflr20dXdQ0GTDJNSUDJuOPK11nHNQm16XKIVvs6VDJYvq2trI5spEWtO2oHawndZYX-x0XLAY_wUgWNtzgVhO3DoO3DxX-GsT2',
         keys: {
@@ -57,6 +58,7 @@ const enviarNotificacion = (req, res) => {
 }
 
 app.route('/api/enviar').post(enviarNotificacion);
+app.get('/api/users', db.getUsers)
 
 const PORT = process.env.PORT || 9000;
 const httpServer = app.listen(PORT, () => {
