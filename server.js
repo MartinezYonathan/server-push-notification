@@ -3,6 +3,11 @@ const express = require('express')
 const db = require('./queries')
 
 const app = express();
+const bodyparser = require('body-parser');
+
+/*assuming an express app is declared here*/
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({extended: true}));
 /**
  * Settings VAPID
  */
@@ -22,7 +27,7 @@ webpush.setVapidDetails(
 
 const enviarNotificacion = (req, res) => {
 
-    console.log(db.getTokent); 
+    //console.log(db.getTokent); 
     const pushSubscription = {
         endpoint: 'https://fcm.googleapis.com/fcm/send/dr4CZJxORFM:APA91bG3i1TEITd8fpV_FL-LDFvh6CkVT7LQo2o8-aflr20dXdQ0GTDJNSUDJuOPK11nHNQm16XKIVvs6VDJYvq2trI5spEWtO2oHawndZYX-x0XLAY_wUgWNtzgVhO3DoO3DxX-GsT2',
         keys: {
@@ -36,7 +41,7 @@ const enviarNotificacion = (req, res) => {
             "title": "😄😄 Saludos",
             "body": "Hola a todos",
             "vibrate": [100, 50, 100],
-            "image": "https://avatars2.githubusercontent.com/u/15802366?s=460&u=ac6cc646599f2ed6c4699a74b15192a29177f85a&v=4",
+            "image": "https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2019/12/9-Best-Online-Avatars-and-How-to-Make-Your-Own-for-Free-image1-5.png",
             "actions": [{
                 "action": "explore",
                 "title": "Go to the site"
@@ -53,12 +58,16 @@ const enviarNotificacion = (req, res) => {
             console.log('Error', err);
         })
 
-    res.send({ data: 'Se envio subscribete!!' })
+    res.send({ data: 'Se envio notification!!' })
 
 }
 
 app.route('/api/enviar').post(enviarNotificacion);
 app.get('/api/users', db.getUsers)
+app.post('/api/llamada', db.createLlamada)
+app.get('/api/llamada', db.getLlamada)
+app.delete('/api/llamada/:id', db.deleteLLamada)
+app.delete('/api/llamada/correo/:email', db.deleteLLamadaByCorreo)
 
 const PORT = process.env.PORT || 9000;
 const httpServer = app.listen(PORT, () => {
