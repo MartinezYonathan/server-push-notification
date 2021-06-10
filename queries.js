@@ -98,8 +98,19 @@ const createLlamada = (request, response) => {
   })
 }
 
-const getLlamada = (request, response) => {
+const getLlamadas = (request, response) => {
   pool.query('SELECT id, email_doc, email_user FROM users_room_llamada ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const getLLamadaByCorreo = (request, response) => {
+  const email = (request.params.email)
+
+  pool.query('SELECT * FROM users_room_llamada WHERE email_doc = $1', [email], (error, results) => {
     if (error) {
       throw error
     }
@@ -131,9 +142,10 @@ const deleteLLamadaByCorreo = (request, response) => {
 
 module.exports = {
     createLlamada,
-    getLlamada,
+    getLlamadas,
     deleteLLamada,
     deleteLLamadaByCorreo,
+    getLLamadaByCorreo,
 
     getUsers,
     getUserById,

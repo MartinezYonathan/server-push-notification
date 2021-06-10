@@ -65,7 +65,8 @@ const enviarNotificacion = (req, res) => {
 app.route('/api/enviar').post(enviarNotificacion);
 app.get('/api/users', db.getUsers)
 app.post('/api/llamada', db.createLlamada)
-app.get('/api/llamada', db.getLlamada)
+app.get('/api/llamadas', db.getLlamadas)
+app.get('/api/llamada/:email', db.getLLamadaByCorreo)
 app.delete('/api/llamada/:id', db.deleteLLamada)
 app.delete('/api/llamada/correo/:email', db.deleteLLamadaByCorreo)
 
