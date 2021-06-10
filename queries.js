@@ -94,7 +94,7 @@ const createLlamada = (request, response) => {
     if (error) {
       throw error
     }
-    response.status(201).send(`llamada added with ID: ${results.insertId}`)
+    response.status(200).send(`llamada added ok`)
   })
 }
 
