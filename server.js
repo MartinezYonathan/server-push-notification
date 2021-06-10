@@ -1,9 +1,12 @@
 const webpush = require('web-push');
 const express = require('express')
 const db = require('./queries')
+var cors = require('cors')
 
 const app = express();
 const bodyparser = require('body-parser');
+
+app.use(cors())
 
 /*assuming an express app is declared here*/
 app.use(bodyparser.json());
